@@ -7,22 +7,32 @@
 # the public TLS certificate at the ingress layer.
 :80 {
     # Reverse proxy to Codexa AI on AKS
-    handle_path /codexaai/api/* {
+    handle /codexaai/api/* {
+        uri strip_prefix /codexaai/api
         reverse_proxy http://20.204.189.207 {
             header_up Host api.20.204.189.207.sslip.io
         }
     }
-    handle_path /codexaai* {
+    handle /codexaai/* {
+        uri strip_prefix /codexaai
+        reverse_proxy http://20.204.189.207 {
+            header_up Host codexa.20.204.189.207.sslip.io
+        }
+    }
+    handle /codexaai {
+        uri strip_prefix /codexaai
         reverse_proxy http://20.204.189.207 {
             header_up Host codexa.20.204.189.207.sslip.io
         }
     }
 
-    # Portfolio static files
-    root * /usr/share/caddy
-    encode gzip
-    try_files {path} /index.html
-    file_server
+    # Portfolio static files (everything else)
+    handle {
+        root * /usr/share/caddy
+        encode gzip
+        try_files {path} /index.html
+        file_server
+    }
 }
 
 # Your public domain
