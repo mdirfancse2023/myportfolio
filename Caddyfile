@@ -21,19 +21,23 @@
 }
 
 # Your public domain
-portfolio.34.180.9.45.sslip.io {
+portfolio.virtualgyans.tech {
     root * /usr/share/caddy
     encode gzip
     try_files {path} /index.html
     file_server
 }
 
-# Old domain redirect
+# Old domain redirects
+portfolio.34.180.9.45.sslip.io {
+    redir https://portfolio.virtualgyans.tech{uri}
+}
+
 app.34.180.9.45.sslip.io {
-    redir https://portfolio.34.180.9.45.sslip.io{uri}
+    redir https://portfolio.virtualgyans.tech{uri}
 }
 
 # Also serve on HTTP for healthchecks or IP access, redirecting to HTTPS
 http://34.180.9.45 {
-    redir https://portfolio.34.180.9.45.sslip.io{uri}
+    redir https://portfolio.virtualgyans.tech{uri}
 }
