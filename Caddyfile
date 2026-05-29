@@ -3,6 +3,15 @@
     email mdirfancse2023@gmail.com
 }
 
+# Azure Container Apps routes traffic to the container over HTTP and supplies
+# the public TLS certificate at the ingress layer.
+:80 {
+    root * /usr/share/caddy
+    encode gzip
+    try_files {path} /index.html
+    file_server
+}
+
 # Your public domain
 portfolio.34.180.9.45.sslip.io {
     root * /usr/share/caddy
