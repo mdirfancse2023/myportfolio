@@ -4,8 +4,10 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  base: process.env.VITE_BASE_PATH || (mode === "production" ? "/myportfolio/" : "/"),
+export default defineConfig(({ mode }) => {
+  const basePath = (process.env.VITE_BASE_PATH || "").replace(/['"]/g, "") || (mode === "production" ? "/myportfolio/" : "/");
+  return {
+    base: basePath,
   server: {
     host: "::",
     port: 8080,
@@ -24,5 +26,6 @@ export default defineConfig(({ mode }) => ({
     globals: true,
     setupFiles: ["./src/test/setup.ts"],
     include: ["src/**/*.{test,spec}.{ts,tsx}"],
-  },
-}));
+  }
+  };
+});
