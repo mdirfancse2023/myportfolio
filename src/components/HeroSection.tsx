@@ -182,7 +182,7 @@ const HeroSection = () => {
           <p className="text-sm text-muted-foreground mb-3 font-mono">▶ Watch My Introduction</p>
           <div className="rounded-2xl overflow-hidden border border-border shadow-lg">
             <iframe
-              src="https://www.youtube.com/embed/n2o-iEJJsRY"
+              src="https://www.youtube.com/embed/lmUNE9TF-AY"
               title="Md Irfan - Introduction"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
